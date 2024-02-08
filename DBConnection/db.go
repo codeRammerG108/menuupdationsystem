@@ -3,6 +3,7 @@ package DBConnection
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	_ "github.com/lib/pq"
 )
@@ -10,11 +11,11 @@ import (
 func DBinit() (*sql.DB, error) {
 	fmt.Printf("Starting with the connection")
 
-	host := "localhost"
-	port := "5433"
-	user := "postgres"
-	password := "Admin123"
-	dbname := "menuupdationsystem"
+	host := os.Getenv("DB_HOST")
+	port := os.Getenv("DB_PORT")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	dbname := os.Getenv("DB_NAME")
 
 	postgresqlDbInfo := fmt.Sprintf("host=%s port=%s user=%s "+
 		"password=%s dbname=%s sslmode=disable",
